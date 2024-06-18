@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "ee0ed60e-ce1b-471d-be44-91048ce38797",
+		"name": "msa2024",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27698671"
+	},
+	"item": [
+		{
+			"name": "http://arch.homework/health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"OK\", function () {",
+							"     pm.response.to.be.ok;",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.status===\"OK\").to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

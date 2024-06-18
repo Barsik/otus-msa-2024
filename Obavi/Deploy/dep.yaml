@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: obavi
+  namespace: obavi-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: obavi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: obavi
+    spec:
+      containers:
+      - name: obavi
+        image: alazaref/otus-msa20240-obavi:1.0
+        ports:
+        - containerPort: 8080
