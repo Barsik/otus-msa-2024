@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: obavi-ns
+data:
+  db-name: obavi
+  db-host: obavi-pgdb-postgresql
+  db-port: "5432"

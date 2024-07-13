@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=obavidb
+    volumes:
+      - "./.db:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"

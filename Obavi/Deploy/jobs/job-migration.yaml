@@ -1,28 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: obavi
+  name: obavi-migration
   namespace: obavi-ns
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: obavi
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   template:
-    metadata:
-      labels:
-        app: obavi
     spec:
       containers:
-      - name: obavi
-        image: alazaref/otus-msa2024-obavi:2.2
-        ports:
-        - containerPort: 8000
+      - name: obavi-migration
+        image: alazaref/otus-msa2024-obavi:2.1
+        args: ["--run-migrations"]
         env:
           - name: Database__Host
             valueFrom:
@@ -49,3 +36,4 @@ spec:
               secretKeyRef:
                 name: postgres-secret
                 key: db-password
+      restartPolicy: OnFailure

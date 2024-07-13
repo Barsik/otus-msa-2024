@@ -1,0 +1,18 @@
+global:
+  # persistence:
+  #   enabled: true
+  #   storageClass: "standard"
+  #   accessModes:
+  #     - ReadWriteOnce
+  #   size: 8Gi
+
+  postgresql:
+    auth:
+      username: "admin"
+      database: "obavi"
+      existingSecret: "postgres-secret"
+      secretKeys:
+        adminPasswordKey: "admin-db-password"
+        userPasswordKey: "db-password"
+    
+    

@@ -7,6 +7,227 @@
 	},
 	"item": [
 		{
+			"name": "helm_homework",
+			"item": [
+				{
+					"name": "create_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create user\", function(){",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.code===200).to.be.true;",
+									"    pm.expect(!!jsonData.id).to.be.true;",
+									"    pm.environment.set(\"created_user_id\", jsonData.id);",
+									"    pm.globals.set(\"created_user_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"user001\",\n  \"firstName\": \"Aleksey\",\n  \"lastName\": \"Lazarev\",\n  \"email\": \"user001@obavi.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/user",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"update user\", function(){",
+									"    pm.expect(pm.response.code===200).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"user001\",\n  \"firstName\": \"Aleksey\",\n  \"lastName\": \"Lazarev\",\n  \"email\": \"user123@obavi.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/user/{{created_user_id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"user",
+								"{{created_user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get user\", function(){",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.code===200).to.be.true;",
+									"    pm.expect(jsonData.email===\"user123@obavi.com\").to.be.true;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"user001\",\n  \"firstName\": \"Aleksey\",\n  \"lastName\": \"Lazarev\",\n  \"email\": \"user001@obavi.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/user/{{created_user_id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"user",
+								"{{created_user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"delete user\", function(){",
+									"    pm.expect(pm.response.code===200).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"user001\",\n  \"firstName\": \"Aleksey\",\n  \"lastName\": \"Lazarev\",\n  \"email\": \"user001@obavi.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/user/{{created_user_id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"user",
+								"{{created_user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "http://arch.homework/health",
 			"event": [
 				{
@@ -14,7 +235,6 @@
 					"script": {
 						"exec": [
 							"pm.test(\"OK\", function () {",
-							"     pm.response.to.be.ok;",
 							"    const json = pm.response.json();",
 							"    pm.expect(json.status===\"OK\").to.be.true;",
 							"});"

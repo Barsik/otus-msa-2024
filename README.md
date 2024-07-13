@@ -25,3 +25,20 @@
      kubectl delete -f .
     ```
 
+## ДЗ: Работа с Helm-ом
+1. Делаем все аналогично `ДЗ: Базовые сущности Кubernetes: ReplicaSet, Deployment, Service, Ingress` с пункта 1 по 3
+2. Устанавливаем PostgreSQL через Helm:
+   1. Заходим в папку `/Obavi/Deploy/helm`
+   2. Запускаем команду:
+        ```bash
+        helm install obavi-pgdb bitnami/postgresql --namespace obavi-ns -f ./pg_values.yaml
+        ```
+3. Делаем доступным наше приложение из minikube
+    ```shell
+    minikube tunnel
+    ```
+5. Открываем `swagger` - http://arch.homework/swagger/index.html
+
+> В папке `/Obavi/Postman` находятся Postman-коллекция с тестами
+> Результат работы `newman`:
+<img src="./assets/newman.helm.png" alt="ewman.helm.png" width="800"/>

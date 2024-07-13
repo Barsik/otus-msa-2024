@@ -1,4 +1,5 @@
 # Common IntelliJ Platform excludes
+Compose/.db/
 .idea/
 # User specific
 **/.idea/**/workspace.xml
